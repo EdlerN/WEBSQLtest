@@ -1,0 +1,19 @@
+﻿@model maildb.Models.MailGrid
+@{
+    ViewBag.Title = "Mail List";
+}
+@using (@Html.BeginForm())
+{
+    <div>
+        <h3>Mail list:</h3>
+        @if (TempData["message"] != null)
+        {<div class="text-success">@TempData["message"]</div>}
+        @if (TempData["error"] != null)
+        {<div class="text-warning"><span class="alert">ERROR:</span> @TempData["error"]</div>}
+        @Html.Partial("List")
+        <p>
+            <input type="submit" name="onNewMail" value="New Mail" />
+            @*@Html.ActionLink("New Mail", "New", "Mails")*@
+        </p>
+    </div>
+}

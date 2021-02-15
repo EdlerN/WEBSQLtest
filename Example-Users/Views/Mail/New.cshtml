@@ -1,0 +1,15 @@
+﻿@model maildb.Models.MailModel
+@{
+    ViewBag.Title = "New " + Html.DisplayNameForModel().ToString().ToLower();
+}
+<h2>@ViewBag.Title</h2>
+@using (@Html.BeginForm("New", "Mails", FormMethod.Post))
+{
+    @Html.EditorFor(m => m.Mail);
+    @Html.EditorFor(m => m.Mail.title);
+    @Html.LabelFor(m => Model.Mail.title)<br />
+    <span /> <br />
+    <br />
+    <p><input type="submit" name="action" value="Add" />&nbsp;<input type="button" onclick="history.go(-1)" value="Cancel" /></p>
+    @*<p>@Html.ActionLink("Back to list", "Index")</p>*@
+}

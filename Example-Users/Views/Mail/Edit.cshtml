@@ -1,0 +1,41 @@
+﻿@model maildb.Models.MailModel
+@{
+    ViewBag.Title = "Edit " + Html.DisplayNameForModel().ToString().ToLower();
+}
+<h2>@ViewBag.Title @Model.Mail.title</h2>
+@using (@Html.BeginForm("Edit", "Mail", FormMethod.Post))
+{
+    @Html.HiddenFor(m => Model.Mail.idmail)
+    <div>
+        @Html.LabelFor(m => Model.Mail.title)
+        @Html.EditorFor(m => Model.Mail.title)
+        @Html.ValidationMessageFor(m => Model.Mail.title)
+    </div>
+    <div>
+        @Html.LabelFor(m => Model.Mail.regdate)
+        @Html.EditorFor(m => Model.Mail.regdate)
+        @Html.ValidationMessageFor(m => Model.Mail.regdate)
+    </div>
+    <div>
+        @Html.LabelFor(m => Model.Mail.adr)
+        @Html.EditorFor(m => Model.Mail.adr)
+        @Html.ValidationMessageFor(m => Model.Mail.adr)
+    </div>
+    <div>
+        @Html.LabelFor(m => Model.Mail.snd)
+        @Html.EditorFor(m => Model.Mail.snd)
+        @Html.ValidationMessageFor(m => Model.Mail.snd)
+    </div>
+    <div>
+        @Html.LabelFor(m => Model.Mail.tags)
+        @Html.EditorFor(m => Model.Mail.tags)
+        @Html.ValidationMessageFor(m => Model.Mail.tags)
+    </div>
+    <div>
+        @Html.LabelFor(m => Model.Mail.text)
+        @Html.EditorFor(m => Model.Mail.text)
+        @Html.ValidationMessageFor(m => Model.Mail.text)
+    </div>
+    <br />
+    <p><input type="submit" name="action" value="Save" />&nbsp;<input type="submit" name="action" value="Remove" onclick="javascript:return confirm('Are you sure?');" />&nbsp;<input type="submit" name="action" value="Cancel" /></p>
+}

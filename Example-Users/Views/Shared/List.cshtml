@@ -1,0 +1,55 @@
+﻿@model maildb.Models.MailGrid
+@using maildb.Domain
+@using maildb.HtmlHelpers
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.ActionLink(Html.DisplayNameFor(m => Model.Mail.First().title).ToString(), "Index", Request.QueryString.ToRouteValueDictionary("sortOrder", Model.SortingInfo.NewOrder(Html.NameFor(m => Model.Mail.First().title).ToString())))
+                @Html.SortIdentifier(Model.SortingInfo.currentSort, Html.NameFor(m => Model.Mail.First().title).ToString())
+                </th>
+                <th>
+                    @Html.ActionLink(Html.DisplayNameFor(m => Model.Mail.First().regdate).ToString(), "Index", Request.QueryString.ToRouteValueDictionary("sortOrder", Model.SortingInfo.NewOrder(Html.NameFor(m => Model.Mail.First().regdate).ToString())))
+                @Html.SortIdentifier(Model.SortingInfo.currentSort, Html.NameFor(m => Model.Mail.First().regdate).ToString())
+                </th>
+                <th>
+                    @Html.ActionLink(Html.DisplayNameFor(m => Model.Mail.First().adr).ToString(), "Index", Request.QueryString.ToRouteValueDictionary("sortOrder", Model.SortingInfo.NewOrder(Html.NameFor(m => Model.Mail.First().adr).ToString())))
+                @Html.SortIdentifier(Model.SortingInfo.currentSort, Html.NameFor(m => Model.Mail.First().adr).ToString())
+                </th>
+                <th>
+                    @Html.ActionLink(Html.DisplayNameFor(m => Model.Mail.First().snd).ToString(), "Index", Request.QueryString.ToRouteValueDictionary("sortOrder", Model.SortingInfo.NewOrder(Html.NameFor(m => Model.Mail.First().snd).ToString())))
+                @Html.SortIdentifier(Model.SortingInfo.currentSort, Html.NameFor(m => Model.Mail.First().snd).ToString())
+                </th>
+                <th>
+                    @Html.ActionLink(Html.DisplayNameFor(m => Model.Mail.First().tags).ToString(), "Index", Request.QueryString.ToRouteValueDictionary("sortOrder", Model.SortingInfo.NewOrder(Html.NameFor(m => Model.Mail.First().tags).ToString())))
+                @Html.SortIdentifier(Model.SortingInfo.currentSort, Html.NameFor(m => Model.Mail.First().tags).ToString())
+                </th>
+                <th>
+                    @Html.ActionLink(Html.DisplayNameFor(m => Model.Mail.First().text).ToString(), "Index", Request.QueryString.ToRouteValueDictionary("sortOrder", Model.SortingInfo.NewOrder(Html.NameFor(m => Model.Mail.First().text).ToString())))
+                @Html.SortIdentifier(Model.SortingInfo.currentSort, Html.NameFor(m => Model.Mail.First().text).ToString())
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Mail)
+            {
+            <tr>
+                <td>@Html.ActionLink(item.title, "Edit", "mail", new { idmail = item.idmail }, null)</td>
+                <td>@Html.DisplayFor(modelitem => item.regdate)</td>
+                <td>@Html.DisplayFor(modelitem => item.adr)</td>
+                <td>@Html.DisplayFor(modelitem => item.snd)</td>
+                <td>@Html.DisplayFor(modelitem => item.tags)</td>
+                <td>@Html.DisplayFor(modelitem => item.text)</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@if (Model.PagingInfo.totalPages > 1)
+{
+    <ul class="pagination">
+        @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x, sortOrder = Model.SortingInfo.currentSort }))
+    </ul>
+}
